@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace PrimalEditor.GameProject
 {
@@ -10,7 +11,21 @@ namespace PrimalEditor.GameProject
         public NewProjectView()
         {
             InitializeComponent();
+        }
 
+        private void OnCreate_Button_Click(object sender, RoutedEventArgs e)
+        {
+            var data = DataContext as NewProject;
+            var projectPath = data.CreateProject(templateListBox.SelectedItem as ProjectTemplate);
+            bool dialogResult = false;
+            var win = Window.GetWindow(this);
+
+            if (!string.IsNullOrEmpty(projectPath))
+            {
+                dialogResult = true;
+            }
+            win.DialogResult = dialogResult;
+            win.Close();
         }
     }
 }
