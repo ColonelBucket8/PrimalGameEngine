@@ -11,6 +11,12 @@ namespace PrimalEditor.GameProject
         public OpenProjectView()
         {
             InitializeComponent();
+            Loaded += (s, e) =>
+            {
+                ListBoxItem item = projectsListBox
+                .ItemContainerGenerator.ContainerFromIndex(projectsListBox.SelectedIndex) as ListBoxItem;
+                item?.Focus();
+            };
         }
 
         private void OnOpen_Button_Click(object sender, RoutedEventArgs e)

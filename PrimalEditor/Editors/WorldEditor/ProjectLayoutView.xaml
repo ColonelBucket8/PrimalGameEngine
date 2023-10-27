@@ -14,7 +14,10 @@
             <RowDefinition  />
         </Grid.RowDefinitions>
         <Button Content="Add Scene" Width="96" VerticalAlignment="Center" 
-                Focusable="False" Grid.Row="0" HorizontalAlignment="Left" Margin="20,0,0,0" />
+                Focusable="False" Grid.Row="0" HorizontalAlignment="Left" Margin="20,0,0,0" 
+                Click="OnAddScene_Button_Click"
+                />
+
         <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
             <ItemsControl ItemsSource="{Binding Scenes}">
                 <ItemsControl.ItemsPanel>
