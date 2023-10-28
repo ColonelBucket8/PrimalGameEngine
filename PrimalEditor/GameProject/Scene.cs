@@ -75,7 +75,6 @@ namespace PrimalEditor.GameProject
         [OnDeserialized]
         private void OnDeserialized(StreamingContext context)
         {
-            if (_gameEntities == null) _gameEntities = new ObservableCollection<GameEntity>();
             if (_gameEntities != null)
             {
                 GameEntities = new ReadOnlyObservableCollection<GameEntity>(_gameEntities);
