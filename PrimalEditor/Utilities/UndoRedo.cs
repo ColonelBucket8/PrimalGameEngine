@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace PrimalEditor.Utilities
 {
-    interface IUndoRedo
+    public interface IUndoRedo
     {
         string Name { get; }
         void Undo();
@@ -36,9 +36,7 @@ namespace PrimalEditor.Utilities
         public void Undo() => _undoAction();
     }
 
-
-
-    class UndoRedo
+    public class UndoRedo
     {
         private readonly ObservableCollection<IUndoRedo> _redoList = new();
         private readonly ObservableCollection<IUndoRedo> _undoList = new();
