@@ -18,7 +18,7 @@ namespace PrimalEditor.GameProject
         [DataMember]
         public string Path { get; private set; }
 
-        public string FullPath => $"{Path}{Name}{Extension}";
+        public string FullPath => $@"{Path}{Name}\{Name}{Extension}";
 
         [DataMember(Name = "Scenes")]
         private ObservableCollection<Scene> _scenes = new ObservableCollection<Scene>();
