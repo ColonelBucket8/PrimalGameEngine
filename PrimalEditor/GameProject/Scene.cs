@@ -44,7 +44,7 @@ namespace PrimalEditor.GameProject
         }
 
         [DataMember(Name = nameof(GameEntities))]
-        private readonly ObservableCollection<GameEntity> _gameEntities = new();
+        private ObservableCollection<GameEntity> _gameEntities = new();
         public ReadOnlyObservableCollection<GameEntity> GameEntities { get; private set; }
 
 
@@ -67,7 +67,7 @@ namespace PrimalEditor.GameProject
 
         private void RemoveGameEntity(GameEntity entity)
         {
-            Debug.Assert(!_gameEntities.Contains(entity));
+            Debug.Assert(_gameEntities.Contains(entity));
             _gameEntities.Remove(entity);
         }
 
@@ -75,6 +75,7 @@ namespace PrimalEditor.GameProject
         [OnDeserialized]
         private void OnDeserialized(StreamingContext context)
         {
+            if (_gameEntities == null) _gameEntities = new ObservableCollection<GameEntity>();
             if (_gameEntities != null)
             {
                 GameEntities = new ReadOnlyObservableCollection<GameEntity>(_gameEntities);
