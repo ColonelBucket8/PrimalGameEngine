@@ -100,7 +100,7 @@ namespace PrimalEditor.GameProject
                 AddScene($"New Scene {_scenes.Count}");
                 Scene newScene = _scenes.Last();
                 int sceneIndex = _scenes.Count - 1;
-                UndoRedo.Add(new UndeRedoAction(
+                UndoRedo.Add(new UndoRedoAction(
                     () => RemoveScene(newScene),
                     () => _scenes.Insert(sceneIndex, newScene),
                     $"Add {newScene.Name}"));
@@ -111,7 +111,7 @@ namespace PrimalEditor.GameProject
                 int sceneIndex = _scenes.IndexOf(x);
                 RemoveScene(x);
 
-                UndoRedo.Add(new UndeRedoAction(
+                UndoRedo.Add(new UndoRedoAction(
                     () => _scenes.Insert(sceneIndex, x),
                     () => RemoveScene(x),
                     $"Remove {x.Name}"));

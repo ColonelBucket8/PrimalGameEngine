@@ -12,18 +12,18 @@ namespace PrimalEditor.Utilities
         void Redo();
     }
 
-    public class UndeRedoAction : IUndoRedo
+    public class UndoRedoAction : IUndoRedo
     {
         private Action _undoAction;
         private Action _redoAction;
 
         public string Name { get; }
 
-        public UndeRedoAction(string name)
+        public UndoRedoAction(string name)
         {
             Name = name;
         }
-        public UndeRedoAction(Action undo, Action redo, string name) : this(name)
+        public UndoRedoAction(Action undo, Action redo, string name) : this(name)
         {
             Debug.Assert(undo != null && redo != null);
             _undoAction = undo;
@@ -38,6 +38,7 @@ namespace PrimalEditor.Utilities
 
     public class UndoRedo
     {
+        private bool _enableAdd = true;
         private readonly ObservableCollection<IUndoRedo> _redoList = new();
         private readonly ObservableCollection<IUndoRedo> _undoList = new();
         public ReadOnlyObservableCollection<IUndoRedo> RedoList { get; }
@@ -62,7 +63,9 @@ namespace PrimalEditor.Utilities
             {
                 IUndoRedo cmd = _undoList.Last();
                 _undoList.RemoveAt(_undoList.Count - 1);
+                _enableAdd = false;
                 cmd.Undo();
+                _enableAdd = true;
                 _redoList.Insert(0, cmd);
             }
         }
@@ -73,15 +76,20 @@ namespace PrimalEditor.Utilities
             {
                 IUndoRedo cmd = _redoList.First();
                 _redoList.RemoveAt(0);
+                _enableAdd = false;
                 cmd.Redo();
+                _enableAdd = true;
                 _undoList.Add(cmd);
             }
         }
 
         public void Add(IUndoRedo cmd)
         {
-            _undoList.Add(cmd);
-            _redoList.Clear();
+            if (_enableAdd)
+            {
+                _undoList.Add(cmd);
+                _redoList.Clear();
+            }
         }
 
     }
