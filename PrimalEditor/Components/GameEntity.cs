@@ -1,7 +1,9 @@
 ﻿using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Runtime.Serialization;
+using System.Windows.Input;
 using PrimalEditor.GameProject;
+using PrimalEditor.Utilities;
 
 namespace PrimalEditor.Components
 {
@@ -48,6 +50,9 @@ namespace PrimalEditor.Components
         private readonly ObservableCollection<Component> _components = new();
         public ReadOnlyObservableCollection<Component> Components { get; private set; }
 
+        public ICommand RenameCommand { get; private set; }
+        public ICommand EnableCommand { get; private set; }
+
         public GameEntity(Scene scene)
         {
             Debug.Assert(scene != null);
@@ -64,6 +69,13 @@ namespace PrimalEditor.Components
                 Components = new ReadOnlyObservableCollection<Component>(_components);
                 OnPropertyChanged(nameof(Components));
             }
+
+            RenameCommand = new RelayCommand<string>(x =>
+            {
+                string oldName = _name;
+                Name = x;
+                Project.UndoRedo.Add(new UndoRedoAction(nameof(Name), this, oldName, x, $"Rename entity '{oldName}' to '{x}'"));
+            }, x => x != _name);
         }
     }
 }
