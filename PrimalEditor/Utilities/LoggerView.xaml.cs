@@ -1,17 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows.Controls;
 
 namespace PrimalEditor.Utilities
 {
@@ -23,6 +10,27 @@ namespace PrimalEditor.Utilities
         public LoggerView()
         {
             InitializeComponent();
+
+            Loaded += (s, e) =>
+            {
+                Logger.Log(MessageType.Info, "Information message");
+                Logger.Log(MessageType.Warning, "Warnign message");
+                Logger.Log(MessageType.Error, "Error message");
+            };
+        }
+
+        private void OnClear_Button_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            Logger.Clear();
+        }
+
+        private void OnMessageFilter_Button_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            int filter = 0x0;
+            if (toggleInfo.IsChecked == true) filter |= (int)MessageType.Info;
+            if (toggleWarning.IsChecked == true) filter |= (int)MessageType.Warning;
+            if (toggleError.IsChecked == true) filter |= (int)MessageType.Error;
+            Logger.SetMessageFilter(filter);
         }
     }
 }

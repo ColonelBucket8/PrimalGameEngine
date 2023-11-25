@@ -76,7 +76,6 @@ namespace PrimalEditor.Utilities
         {
             _messageFilter = mask;
             FilteredMessages.View.Refresh();
-
         }
 
     }
