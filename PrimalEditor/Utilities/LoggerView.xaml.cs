@@ -10,13 +10,6 @@ namespace PrimalEditor.Utilities
         public LoggerView()
         {
             InitializeComponent();
-
-            Loaded += (s, e) =>
-            {
-                Logger.Log(MessageType.Info, "Information message");
-                Logger.Log(MessageType.Warning, "Warnign message");
-                Logger.Log(MessageType.Error, "Error message");
-            };
         }
 
         private void OnClear_Button_Click(object sender, System.Windows.RoutedEventArgs e)

@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.Serialization;
-using System.Windows.Input;
 using PrimalEditor.GameProject;
 using PrimalEditor.Utilities;
 
@@ -53,9 +52,6 @@ namespace PrimalEditor.Components
         private readonly ObservableCollection<Component> _components = new();
         public ReadOnlyObservableCollection<Component> Components { get; private set; }
 
-        public ICommand RenameCommand { get; private set; }
-        public ICommand IsEnabledCommand { get; private set; }
-
         public GameEntity(Scene scene)
         {
             Debug.Assert(scene != null);
@@ -73,19 +69,6 @@ namespace PrimalEditor.Components
                 OnPropertyChanged(nameof(Components));
             }
 
-            RenameCommand = new RelayCommand<string>(x =>
-            {
-                string oldName = _name;
-                Name = x;
-                Project.UndoRedo.Add(new UndoRedoAction(nameof(Name), this, oldName, x, $"Rename entity '{oldName}' to '{x}'"));
-            }, x => x != _name);
-
-            IsEnabledCommand = new RelayCommand<bool>(x =>
-            {
-                bool oldValue = _isEnabled;
-                IsEnabled = x;
-                Project.UndoRedo.Add(new UndoRedoAction(nameof(IsEnabled), this, oldValue, x, x ? $"Enable {Name}" : $"Disable {Name}"));
-            });
         }
     }
 
@@ -117,7 +100,7 @@ namespace PrimalEditor.Components
                 if (_name != value)
                 {
                     _name = value;
-                    OnPropertyChanged(nameof(IsEnabled));
+                    OnPropertyChanged(nameof(Name));
                 }
             }
         }
