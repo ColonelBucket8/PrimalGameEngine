@@ -3,5 +3,6 @@
   <ItemGroup>
     <ClInclude Include="Common\CommonHeaders.h" />
     <ClInclude Include="Common\PrimitiveTypes.h" />
+    <ClInclude Include="Common\Id.h" />
   </ItemGroup>
 </Project>
