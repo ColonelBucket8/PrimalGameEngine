@@ -11,5 +11,6 @@ namespace primal::id {
 	constexpr id_type generation_mask{ (id_type{1} << generation_bits) - 1 };
 	constexpr id_type id_mask{ id_type{-1} };
 
+	using generation_type = std::conditional_t<generation_bits <= 16, std::conditional_t<generation_bits <= 8, u8, u16>, u32>;
 }
 
