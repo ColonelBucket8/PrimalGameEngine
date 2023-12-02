@@ -11,7 +11,7 @@ namespace primal::utl {
 }
 #endif
 
-#if USE_STD_DEQUE
+#if USE_STL_DEQUE
 #include <deque>
 namespace primal::utl {
 	template<typename T>
