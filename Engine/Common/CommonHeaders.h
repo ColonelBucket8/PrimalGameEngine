@@ -6,4 +6,5 @@
 #include <typeinfo>
 
 // common headers
+#include "..\Utilities\Utilities.h"
 #include "PrimitiveTypes.h"

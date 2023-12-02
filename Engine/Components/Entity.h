@@ -7,7 +7,7 @@ namespace primal {
 
 	INIT_INFO(transform);
 
-#undef INIT_INFO
+#undef INIT_INF
 
 	namespace game_entity {
 		struct entity_info
@@ -15,7 +15,7 @@ namespace primal {
 			transform::init_info* transform{ nullptr };
 		};
 
-		u32 create_game_entity(const entity_info& info);
+		entity_id create_game_entity(const entity_info& info);
 		void remove_game_entity(entity_id id);
 		bool is_alive(entity_id id);
 	}
