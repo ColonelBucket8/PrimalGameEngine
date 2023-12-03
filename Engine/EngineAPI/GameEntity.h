@@ -1,6 +1,7 @@
 #pragma once
 
 #include "..\Components\ComponentsCommon.h"
+#include "TransformComponent.h"
 
 namespace primal::game_entity {
 
@@ -13,6 +14,7 @@ namespace primal::game_entity {
 		constexpr entity_id get_id() const { return _id; }
 		constexpr bool is_valid() const { return id::is_valid(_id); }
 
+		transform::component transform() const;
 	private:
 		entity_id _id;
 	};
