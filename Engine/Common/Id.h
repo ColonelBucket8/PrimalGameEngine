@@ -19,7 +19,7 @@ namespace primal::id {
 	static_assert(sizeof(generation_type) * 8 >= internal::generation_bits);
 	static_assert((sizeof(id_type) - sizeof(generation_type)) > 0);
 
-	inline bool
+	constexpr bool
 		is_valid(id_type id)
 	{
 		return id != invalid_id;
