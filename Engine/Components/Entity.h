@@ -7,7 +7,7 @@ namespace primal {
 
 	INIT_INFO(transform);
 
-#undef INIT_INF
+#undef INIT_INFO
 
 	namespace game_entity {
 		struct entity_info
