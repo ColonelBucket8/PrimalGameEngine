@@ -12,7 +12,7 @@ namespace primal::id {
 		constexpr id_type generation_mask{ (id_type{1} << generation_bits) - 1 };
 	} // internal namespace
 
-	constexpr id_type invalid_id{ id_type(1) };
+	constexpr id_type invalid_id{ id_type(-1) };
 	constexpr u32 min_deleted_elements{ 1024 };
 
 	using generation_type = std::conditional_t<internal::generation_bits <= 16, std::conditional_t<internal::generation_bits <= 8, u8, u16>, u32>;
@@ -63,7 +63,7 @@ namespace primal::id {
 	{													\
 		constexpr explicit name(id::id_type id)			\
 		: id_base{ id } {}						      	\
-		constexpr name() : id_base{ id::invalid_id } {}	\
+		constexpr name() : id_base{ 0 } {}				\
 	};
 #else
 #define DEFINE_TYPE_ID(name) using name = id::id_type;

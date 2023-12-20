@@ -4,7 +4,7 @@
 
 namespace primal::transform {
 
-	struct
+	struct init_info
 	{
 		f32 position[3]{};
 		f32 rotation[4]{};
